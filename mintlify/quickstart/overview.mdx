@@ -1,0 +1,73 @@
+---
+title: "Quickstart overview"
+description: "Build the full Open Brain in eight steps, about 45 minutes."
+---
+
+By the end of this quickstart you'll have:
+
+- A Supabase project with a `thoughts` table and vector search
+- An OpenRouter account funded for embeddings + lightweight LLM calls
+- A remote MCP server deployed as a Supabase Edge Function
+- Your AI client connected to it, writing and reading thoughts on demand
+
+## What you need
+
+- Email + a few minutes to verify accounts (Supabase, OpenRouter)
+- About **$5 on a card** for OpenRouter credits (lasts months)
+- An MCP-capable AI client: Claude Desktop, ChatGPT (paid), Claude Code, Cursor, Codex, Windsurf
+
+No coding experience required. The whole flow is paste-the-SQL, paste-the-command, paste-the-URL.
+
+<Warning>
+**Download the [credential tracker](https://raw.githubusercontent.com/NateBJones-Projects/OB1/main/docs/open-brain-credential-tracker.xlsx) before you start.** You'll generate keys you can't retrieve later. The spreadsheet has a slot for every credential.
+</Warning>
+
+## The eight steps
+
+<Steps>
+  <Step title="Create a Supabase project">
+    See [Supabase setup](/quickstart/supabase). Sign up, create the `open-brain` project, save the project ref.
+  </Step>
+  <Step title="Set up the database">
+    Enable pgvector, create the `thoughts` table, the `match_thoughts` function, and grant service-role access. Five SQL blocks — covered in [Supabase setup](/quickstart/supabase).
+  </Step>
+  <Step title="Save your API keys">
+    Settings → API Keys → copy Project URL and Secret key into the tracker.
+  </Step>
+  <Step title="Get an OpenRouter key">
+    See [OpenRouter setup](/quickstart/openrouter). Sign up, fund $5 in credits, generate a key.
+  </Step>
+  <Step title="Generate an access key">
+    `openssl rand -hex 32` (Mac/Linux) or PowerShell one-liner (Windows). This guards your MCP server.
+  </Step>
+  <Step title="Deploy the MCP server">
+    See [MCP deploy](/quickstart/mcp-deploy). Install the Supabase CLI, link your project, set secrets, deploy the Edge Function.
+  </Step>
+  <Step title="Connect your AI client">
+    See [Connect client](/quickstart/connect-client). One URL per client.
+  </Step>
+  <Step title="Verify it works">
+    Capture a test thought, search for it. See [Verify](/quickstart/verify).
+  </Step>
+</Steps>
+
+<Info>
+**Source of truth.** This quickstart is a polished walkthrough. The canonical, maintained, fully-screenshotted version lives in the OB1 repo at [`docs/01-getting-started.md`](https://github.com/NateBJones-Projects/OB1/blob/main/docs/01-getting-started.md). If you hit something not covered here, that's where to look — plus the [FAQ](/faq).
+</Info>
+
+## Other paths
+
+<CardGroup cols={2}>
+  <Card title="AI-assisted" icon="robot" href="/quickstart/ai-assisted">
+    Have Cursor, Claude Code, or another coding agent drive the build for you.
+  </Card>
+  <Card title="Video walkthrough" icon="video" href="https://vimeo.com/1174979042/f883f6489a">
+    27-minute video — same eight steps, different format.
+  </Card>
+</CardGroup>
+
+## What about Slack capture?
+
+The core quickstart above gets you a working MCP server you can use from any AI client. **Slack capture is a separate, optional integration** — it adds a Slack channel as a quick-capture surface (type a thought, Slack message gets embedded and stored).
+
+If you want it, follow [`integrations/slack-capture/README.md`](https://github.com/NateBJones-Projects/OB1/tree/main/integrations/slack-capture) after the core quickstart is working. It deploys a second Edge Function (`ingest-thought`) alongside `open-brain-mcp` and reuses the same database + access key.
