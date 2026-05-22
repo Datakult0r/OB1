@@ -1,0 +1,25 @@
+---
+title: "Changelog"
+description: "What's new in Open Brain."
+---
+
+<Update label="2026-05-22" description="Week of May 18">
+
+Documentation site launch week. Surfaced product features and known issues that affect installs.
+
+## New
+
+- **Companion prompts library.** Five ready-to-use prompts — Memory Migration, Second Brain Migration, Spark, Quick Capture Templates, and Weekly Review — are now indexed in one place. Drop them into any chat client connected to Open Brain. See [Companion prompts](/companion-prompts).
+- **AI-assisted setup guide.** A meta-guide for driving the Open Brain install from an AI coding tool, including credential-tracker discipline and the "configuration problems need configuration fixes" gotcha. See [AI-assisted setup](/quickstart/ai-assisted).
+- **Tool surface audit reference.** Documents the three consolidation patterns (unified CRUD, read/write split, generic entity manager), the three-server scoping pattern, and the four prompt kits — useful when designing your own extensions. See [Tool surface audit](/reference/tool-audit).
+
+## Updates
+
+- **Slack/Discord capture pattern.** The webhook-driven `ingest-thought` blueprint is now explicitly documented as a reusable pattern for Telegram, iMessage, watchOS, and similar capture surfaces. See [Integrations](/extend/integrations).
+- **Content fingerprint dedup primitive.** The `capture_thought` dedup path (SHA-256 fingerprint, idempotent inserts) is now documented in the thoughts table reference. See [Thoughts table](/reference/thoughts-table).
+
+## Fixes
+
+- **Postgres 17 install compatibility.** New installs on Postgres 17 hit a partial-unique-index inference error on `ON CONFLICT (content_fingerprint) DO UPDATE`. The workaround — repeating the index predicate in the `ON CONFLICT` clause — is now documented inline on the [Thoughts table](/reference/thoughts-table) reference page.
+
+</Update>
